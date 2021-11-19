@@ -29,6 +29,7 @@ public class Frame{
       //Splash screen
       frame.add(splashPanel);
       frame.setTitle("24/7 Studios");
+      frame.setLocationRelativeTo(null);
       frame.setBackground(Color.BLACK);
       splashPanel.add(spPanel.splashImg);
       frame.pack();
@@ -41,9 +42,15 @@ public class Frame{
          System.out.println(e);
       }
 
-      System.out.println("Fuck Work");
-      frame.getContentPane().remove(splashPanel);
+      frame.remove(splashPanel);//Removing the splash panel
+      
+      //Setting up the new Game Board
+      gamePanel = new Game();//Importing a panel from a class
       frame.add(gamePanel);
+      frame.setTitle("24/7 Studios");
+      frame.setLocationRelativeTo(null);
+      frame.pack();
+
       
       frame.invalidate();
       frame.validate();
