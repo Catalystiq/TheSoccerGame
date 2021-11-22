@@ -71,14 +71,14 @@ public class Game extends JPanel implements Runnable, KeyListener{
 
     }
     public void move(){
-
+        ball.move();
     }
     
 
     public void run() {
         while(true){
             try {//This should allow it to run 60 times a second
-                Thread.sleep(17);
+                Thread.sleep(34);
             } catch (Exception e) {
                 System.out.println("UM your in some deep crap buddy"+e);
             }

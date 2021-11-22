@@ -4,7 +4,8 @@ import java.awt.*;
 
 public class Ball {
     int GAME_WIDTH,GAME_HEIGHT;
-    int x,y;
+    int x,y, xVelocity, yVelocity;
+    double loss = .05;
     final int BALL_SIZE = 20;
 
     Ball(int width, int height){
@@ -13,9 +14,32 @@ public class Ball {
 
         x = (GAME_WIDTH/2)-(BALL_SIZE/2);
         y = (GAME_HEIGHT/2)-(BALL_SIZE/2);
+        
+        xVelocity = 10;
+        yVelocity = -10;
     }
 
-    public void setDirection(int xVelocity, int yVelocity){//Setting the location of the ball
+    public void move(){//Setting the location of the ball
+        
+        if(xVelocity>1){
+            xVelocity-=loss;
+        }else if(xVelocity<=1 && xVelocity >=-1){
+            xVelocity=0; 
+        }else{
+            xVelocity += loss;
+        }
+        
+        if(yVelocity>1){
+            yVelocity-=loss;
+        }else if(yVelocity<=1 && yVelocity >=-1){
+            yVelocity=0; 
+        }else{
+            yVelocity += loss;
+        }
+        
+        
+        
+        //Setting the x and y
         x += xVelocity;
         y +=yVelocity;
     }
