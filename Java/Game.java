@@ -7,7 +7,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class Game extends JPanel implements Runnable{
+public class Game extends JPanel implements Runnable, KeyListener{
     //Basic Panel Info for future needs
     static final int GAME_HEIGHT = 550;
     static final int GAME_WIDTH = 1000;
@@ -73,6 +73,7 @@ public class Game extends JPanel implements Runnable{
     public void move(){
 
     }
+    
 
     public void run() {
         while(true){
@@ -84,5 +85,16 @@ public class Game extends JPanel implements Runnable{
 
             updatePanel();
         }
+    }
+    
+    //Key listener
+    public void keyTyped(KeyEvent e) {
+        //Um this needs to be here but i dont need to use it
+    }
+    public void keyPressed(KeyEvent e) {
+      System.out.println("WA");
+    }
+    public void keyReleased(KeyEvent e) {
+      System.out.println("L Jar");
     }
 }

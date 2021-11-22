@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class Main {
+public class main {
 
     //Basic Game Variables
     static final int GAME_HEIGHT = 550;
@@ -45,7 +45,7 @@ public class Main {
       
       //Setting up the new Game Board
       gamePanel = new Game();//Importing a panel from a class
-      frame.addKeyListener(new KeyInput());
+      frame.addKeyListener(new Game());
       gamePanel.setFocusable(true);
       gamePanel.setPreferredSize(SCREEN_SIZE);
       frame.add(gamePanel);
