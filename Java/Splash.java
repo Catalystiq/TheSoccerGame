@@ -1,8 +1,5 @@
 package Java;
-/*Imports*/
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+//This is the splash screen that will show for the first 5 seconds of the program
 import javax.swing.*;
 
 public class Splash {

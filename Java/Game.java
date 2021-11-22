@@ -7,24 +7,82 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class Game extends JPanel {
-    //Basic Game Variables
-    final Color FIELD = new Color(0,128,0);
-    final Dimension SCREEN_SIZE = new Dimension(1000,550);
+public class Game extends JPanel implements Runnable{
+    //Basic Panel Info for future needs
+    static final int GAME_HEIGHT = 550;
+    static final int GAME_WIDTH = 1000;
     
+    //player values
+    final int PLAYER_SIZE = 50;
+    final Color PLAYER1_COLOR = new Color(255,0,0);
+    final Color PLAYER2_COLOR = new Color(0,0,255);
+
+    //Planning for instances(Note this is for the buidling process just to keep track so no one is confused :)
+    Thread gameThread;//This is for runnable it makes a cool little thread for something
+    Player player1;
+    Player player2;
+    Goals goal1;
+    Goals goal2;
+    Ball ball;
+    Board board;
     
     public Game(){
-        //Setting up panel
-        this.setPreferredSize(SCREEN_SIZE);
-        this.setBackground(FIELD);
+        newComponents();
+
+        gameThread = new Thread(this);//Making a thread
+        gameThread.start();
+    }
+    
+    /*Creating new objects*/
+    public void newComponents(){
+        board = new Board(GAME_WIDTH,GAME_HEIGHT);
+        goal1 = new Goals(GAME_WIDTH,GAME_HEIGHT,1);
+        goal2 = new Goals(GAME_WIDTH,GAME_HEIGHT,2);
+        ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
+        player1 = new Player(GAME_WIDTH,GAME_HEIGHT,1);
+        player2 = new Player(GAME_WIDTH,GAME_HEIGHT,2);
+    }
+    //Updating/Drawing objects onto the panel
+    public void paint(Graphics g){
+        Image image = createImage(getWidth(),getHeight());
+        Graphics graphics = image.getGraphics();
+
+        draw(graphics);//Draws all of the components in the draw method
+
+        g.drawImage(image, 0, 0, this);//This draws the image which should have all the components
     }
 
-    //@Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-  
-        Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.CYAN);
-        g2.fillRect(500, 275, 100, 50);
+    public void draw(Graphics g){
+        board.draw(g);
+        goal1.draw(g);
+        goal2.draw(g);
+        ball.draw(g);
+        player1.draw(g);
+        player2.draw(g);
+    }
+
+    public void updatePanel(){
+        checkInteractions();
+        move();
+        repaint();
+    }
+
+    public void checkInteractions(){
+
+    }
+    public void move(){
+
+    }
+
+    public void run() {
+        while(true){
+            try {//This should allow it to run 60 times a second
+                Thread.sleep(17);
+            } catch (Exception e) {
+                System.out.println("UM your in some deep crap buddy"+e);
+            }
+
+            updatePanel();
+        }
     }
 }
