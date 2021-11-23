@@ -13,7 +13,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     static final int GAME_WIDTH = 1000;
     
     //player values
-    final int PLAYER_SIZE = 50;
+    final int PLAYER_SIZE = 40;
     final Color PLAYER1_COLOR = new Color(255,0,0);
     final Color PLAYER2_COLOR = new Color(0,0,255);
 
@@ -40,8 +40,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
         goal1 = new Goals(GAME_WIDTH,GAME_HEIGHT,1);
         goal2 = new Goals(GAME_WIDTH,GAME_HEIGHT,2);
         ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
-        player1 = new Player((GAME_WIDTH/2)-250, (GAME_HEIGHT/2)-(40/2), 1);
-        player2 = new Player(((GAME_WIDTH/2)+250)-(40/2), (GAME_HEIGHT/2)-(40/2), 2);
+        player1 = new Player((GAME_WIDTH/2)-250, (GAME_HEIGHT/2)-(40/2),PLAYER_SIZE, 1);
+        //player2 = new Player(((GAME_WIDTH/2)+250)-(40/2), (GAME_HEIGHT/2)-(40/2), 2);
     }
     //Updating/Drawing objects onto the panel
     public void paint(Graphics g){
@@ -59,7 +59,6 @@ public class Game extends JPanel implements Runnable, KeyListener{
         goal2.draw(g);
         ball.draw(g);
         player1.draw(g);
-        player2.draw(g);
     }
 
     public void updatePanel(){
@@ -73,6 +72,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
     public void move(){
         ball.move();
+        player1.move();
+        //player2.move();
     }
     
 
@@ -94,12 +95,10 @@ public class Game extends JPanel implements Runnable, KeyListener{
         }
 
         public void keyPressed(KeyEvent e) {
-            player1.keyPressed(e);
-            player2.keyPressed(e);
+            player1.yVelocity = 10;
         }
 
         public void keyReleased(KeyEvent e) {
-            player1.keyReleased(e);
-            player2.keyReleased(e);
+
         }
 }

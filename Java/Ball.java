@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Ball implements Runnable{
     int GAME_WIDTH,GAME_HEIGHT;
-    int x,y, xVelocity, yVelocity;
+    int x,y,xVelocity,yVelocity;
     double loss = 2;
     final int BALL_SIZE = 20;
 
@@ -21,8 +21,8 @@ public class Ball implements Runnable{
         ballThread.start();
 
         //These lines of code is for testing remove once tested!!!!!!!!!!!
-        xVelocity = -10;
-        yVelocity = 10;
+        //xVelocity = -10;
+        //yVelocity = 10;
     }
 
     public void run(){
