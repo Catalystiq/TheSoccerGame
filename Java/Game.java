@@ -13,18 +13,18 @@ public class Game extends JPanel implements Runnable, KeyListener{
     static final int GAME_WIDTH = 1000;
     
     //player values
-    final int PLAYER_SIZE = 40;
-    final Color PLAYER1_COLOR = new Color(255,0,0);
-    final Color PLAYER2_COLOR = new Color(0,0,255);
+    static final int PLAYER_SIZE = 50;
+    static final Color PLAYER1_COLOR = new Color(255,0,0);
+    static final Color PLAYER2_COLOR = new Color(0,0,255);
+    static final int speed = 10;
+    
+    //Player location data
+    static int player1X,player1Y,player1XVelocity,player1YVelocity;
+    static int player2X,player2Y,player2XVelocity,player2YVelocity;
 
     //Planning for instances(Note this is for the buidling process just to keep track so no one is confused :)
     Thread gameThread;//This is for runnable it makes a cool little thread for something
-    Player player1;
-    Player player2;
-    Goals goal1;
-    Goals goal2;
-    Ball ball;
-    Board board;
+    
     
     public Game(){
         newComponents();
@@ -36,29 +36,23 @@ public class Game extends JPanel implements Runnable, KeyListener{
     
     /*Creating new objects*/
     public void newComponents(){
-        board = new Board(GAME_WIDTH,GAME_HEIGHT);
-        goal1 = new Goals(GAME_WIDTH,GAME_HEIGHT,1);
-        goal2 = new Goals(GAME_WIDTH,GAME_HEIGHT,2);
-        ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
-        player1 = new Player((GAME_WIDTH/2)-250, (GAME_HEIGHT/2)-(40/2),PLAYER_SIZE, 1);
-        //player2 = new Player(((GAME_WIDTH/2)+250)-(40/2), (GAME_HEIGHT/2)-(40/2), 2);
+        //Setting the initial position
+        player1X = 200;
+        player1Y = (GAME_HEIGHT/2)-(PLAYER_SIZE/2);
+        
+        player2X = 800-PLAYER_SIZE;
+        player2Y = (GAME_HEIGHT/2)-(PLAYER_SIZE/2);
     }
     //Updating/Drawing objects onto the panel
     public void paint(Graphics g){
-        Image image = createImage(getWidth(),getHeight());
-        Graphics graphics = image.getGraphics();
-
-        draw(graphics);//Draws all of the components in the draw method
-
-        g.drawImage(image, 0, 0, this);//This draws the image which should have all the components
-    }
-
-    public void draw(Graphics g){
-        board.draw(g);
-        goal1.draw(g);
-        goal2.draw(g);
-        ball.draw(g);
-        player1.draw(g);
+        
+        //Drawing player 1
+        g.setColor(PLAYER1_COLOR);
+        g.fillRect(player1X,player1Y,PLAYER_SIZE,PLAYER_SIZE);
+        
+        //Drawing player 2
+        g.setColor(PLAYER2_COLOR);
+        g.fillRect(player2X,player2Y,PLAYER_SIZE,PLAYER_SIZE);
     }
 
     public void updatePanel(){
@@ -68,19 +62,49 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
 
     public void checkInteractions(){
-
+      
+      //This is for the wall for the players so they dont go past
+      if(player1X <= 0){//Player 1
+         player1XVelocity = 1;
+      }
+      if((player1X+PLAYER_SIZE) >= GAME_WIDTH){
+         player1XVelocity = -1;
+      }
+      if(player1Y <= 0){
+         player1YVelocity = 1;
+      }
+      if((player1Y+PLAYER_SIZE) >= GAME_HEIGHT){
+         player1YVelocity = -1;
+      }
+      
+      if(player2X <= 0){//Player 2
+         player2XVelocity = 1;
+      }
+      if((player2X+PLAYER_SIZE) >= GAME_WIDTH){
+         player2XVelocity = -1;
+      }
+      if(player2Y <= 0){
+         player2YVelocity = 1;
+      }
+      if((player2Y+PLAYER_SIZE) >= GAME_HEIGHT){
+         player2YVelocity = -1;
+      }
+      
+      //Checking if the player is touching eachother
     }
     public void move(){
-        ball.move();
-        player1.move();
-        //player2.move();
+        player1Y += player1YVelocity;
+        player1X += player1XVelocity;
+        
+        player2Y += player2YVelocity;
+        player2X += player2XVelocity;
     }
     
 
     public void run() {
         while(true){
             try {//This should allow it to run 60 times a second
-                Thread.sleep(34);
+                Thread.sleep(17);
             } catch (Exception e) {
                 System.out.println("UM your in some deep crap buddy"+e);
             }
@@ -95,10 +119,58 @@ public class Game extends JPanel implements Runnable, KeyListener{
         }
 
         public void keyPressed(KeyEvent e) {
-            player1.yVelocity = 10;
+            if(e.getKeyCode()==KeyEvent.VK_W){
+               player1YVelocity = -speed;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_S){
+               player1YVelocity = speed;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_A){
+               player1XVelocity = -speed;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_D){
+               player1XVelocity = speed;
+            }
+            
+            if(e.getKeyCode()==KeyEvent.VK_UP){
+               player2YVelocity = -speed;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_DOWN){
+               player2YVelocity = speed;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_LEFT){
+               player2XVelocity = -speed;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+               player2XVelocity = speed;
+            }
         }
 
         public void keyReleased(KeyEvent e) {
-
+         if(e.getKeyCode()==KeyEvent.VK_W){
+               player1YVelocity = 0;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_S){
+               player1YVelocity = 0;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_A){
+               player1XVelocity = 0;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_D){
+               player1XVelocity = 0;
+            }
+            
+            if(e.getKeyCode()==KeyEvent.VK_UP){
+               player2YVelocity = 0;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_DOWN){
+               player2YVelocity = 0;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_LEFT){
+               player2XVelocity = 0;
+            }
+            if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+               player2XVelocity = 0;
+            }
         }
 }

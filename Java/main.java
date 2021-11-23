@@ -11,6 +11,8 @@ public class main {
     static final int GAME_HEIGHT = 550;
     static final int GAME_WIDTH = 1000;
     static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH,GAME_HEIGHT);//Making it into a Diemension form for the pannal
+    static final Color FIELD = new Color(0,153,0);
+    
     public static void main(String args[]){
       //Calling classes
       Splash spPanel = new Splash();
@@ -48,6 +50,7 @@ public class main {
       frame.addKeyListener(new Game());
       gamePanel.setFocusable(true);
       gamePanel.setPreferredSize(SCREEN_SIZE);
+      gamePanel.setBackground(FIELD);
       frame.add(gamePanel);
       frame.setTitle("The Soccer Game");
       frame.setLocationRelativeTo(null);
