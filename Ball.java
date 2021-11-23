@@ -8,7 +8,7 @@ public class Ball extends Rectangle{
     Random random;
     int xVelocity;//How fast on x axis
     int yVelocity;//How fast on y axis
-    int initialSpeed = 2;//Speed of the ball
+    int initialSpeed = 5;//Speed of the ball
 
     Ball(int x, int y, int width, int height){
         super(x,y,width,height);//Sending to the super class known as rectangle

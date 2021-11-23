@@ -14,8 +14,8 @@ public class GamePanel extends JPanel implements Runnable {
     static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);// WTF
 
     static final int BALL_DIAMETER = 20;// Setting demesions for the objects in the game
-    static final int PADDLE_WIDTH = 25;
-    static final int PADDLE_HEIGHT = 100;
+    static final int PADDLE_WIDTH = 50;
+    static final int PADDLE_HEIGHT = 50;
 
     //Planning instances
     Thread gameThread;
@@ -77,25 +77,25 @@ public class GamePanel extends JPanel implements Runnable {
         //Bounce of the paddle
         if(ball.intersects(paddle1)){
             ball.xVelocity = Math.abs(ball.xVelocity);
-            ball.xVelocity++;//Makes the ball speed up a little
-
-            if(ball.yVelocity>0){
-                ball.yVelocity++;//Again more speed
-            }else{
-                ball.yVelocity--;
-            }
+            // ball.xVelocity++;//Makes the ball speed up a little
+// 
+//             if(ball.yVelocity>0){
+//                 ball.yVelocity++;//Again more speed
+//             }else{
+//                 ball.yVelocity--;
+//             }
             ball.setXDirection(ball.xVelocity);
             ball.setYDirection(ball.yVelocity);
         }
         if(ball.intersects(paddle2)){
             ball.xVelocity = Math.abs(ball.xVelocity);
-            ball.xVelocity++;//Makes the ball speed up a little
-
-            if(ball.yVelocity>0){
-                ball.yVelocity++;//Again more speed
-            }else{
-                ball.yVelocity--;
-            }
+            // ball.xVelocity++;//Makes the ball speed up a little
+// 
+//             if(ball.yVelocity>0){
+//                 ball.yVelocity++;//Again more speed
+//             }else{
+//                 ball.yVelocity--;
+//             }
             ball.setXDirection(-ball.xVelocity);
             ball.setYDirection(ball.yVelocity);
         }
