@@ -29,6 +29,7 @@ public class Game extends JPanel implements Runnable, KeyListener{
     public Game(){
         newComponents();
 
+        
         gameThread = new Thread(this);//Making a thread
         gameThread.start();
     }
@@ -39,8 +40,8 @@ public class Game extends JPanel implements Runnable, KeyListener{
         goal1 = new Goals(GAME_WIDTH,GAME_HEIGHT,1);
         goal2 = new Goals(GAME_WIDTH,GAME_HEIGHT,2);
         ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
-        player1 = new Player(GAME_WIDTH,GAME_HEIGHT,1);
-        player2 = new Player(GAME_WIDTH,GAME_HEIGHT,2);
+        player1 = new Player((GAME_WIDTH/2)-250, (GAME_HEIGHT/2)-(40/2), 1);
+        player2 = new Player(((GAME_WIDTH/2)+250)-(40/2), (GAME_HEIGHT/2)-(40/2), 2);
     }
     //Updating/Drawing objects onto the panel
     public void paint(Graphics g){
@@ -88,13 +89,17 @@ public class Game extends JPanel implements Runnable, KeyListener{
     }
     
     //Key listener
-    public void keyTyped(KeyEvent e) {
-        //Um this needs to be here but i dont need to use it
-    }
-    public void keyPressed(KeyEvent e) {
-      System.out.println("WA");
-    }
-    public void keyReleased(KeyEvent e) {
-      System.out.println("L Jar");
-    }
+        public void keyTyped(KeyEvent e){
+            
+        }
+
+        public void keyPressed(KeyEvent e) {
+            player1.keyPressed(e);
+            player2.keyPressed(e);
+        }
+
+        public void keyReleased(KeyEvent e) {
+            player1.keyReleased(e);
+            player2.keyReleased(e);
+        }
 }
